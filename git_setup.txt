@@ -1,0 +1,18 @@
+
+git init
+
+git add <FILE>
+
+git commit
+
+# create new repository on github.com
+# <URL> = quick setup HTTPS URL
+
+git remote add origin <URL>
+
+git status
+
+git push --set-upstream origin master
+
+git push
+
