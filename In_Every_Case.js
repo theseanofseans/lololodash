@@ -102,4 +102,22 @@ lololodash will call your function and test it with different arguments.
  » To verify your program, run: lololodash verify program.js
  » For help run: lololodash help
 */
+//  * All cities having a population over 1 million are "big".
+//  * Cities having a population less than 1 million but more than 0.5 million are "med".
+//  * All cities having a population less than 0.5 million are "small".
+
+var _ = require("lodash");
+    
+var worker = function( obj ) {
+	return _.forEach( obj , function(item) {
+		if (item.population > 1.0)
+			item.size= 'big';
+		else if ((item.population > 0.5) && (item.population < 1.0))
+			item.size= 'med';
+		else if (item.population < 0.5)
+			item.size= 'small';
+	});
+};
+    
+module.exports = worker;
 
