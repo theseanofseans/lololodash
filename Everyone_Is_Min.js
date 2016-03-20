@@ -85,7 +85,16 @@ lololodash will call your function and test it with different arguments.
 
 var _ = require("lodash");
     
-var worker = function(arguments) {
+var worker = function(obj) {
+	var hot_or_warm= { hot: [] , warm: [] };
+// _.forEach({ 'a': 1, 'b': 2 }, function(value, key) 
+	_.forEach( obj , function(temps , town) {
+		if (_.every(temps , function(temp) { return temp > 19}) ) 
+			hot_or_warm.hot.push(town);
+		else if (_.some(temps , function(temp) { return temp > 19}) ) 
+			hot_or_warm.warm.push(town);
+	});
+	return hot_or_warm;
 };
     
 module.exports = worker;
