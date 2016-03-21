@@ -71,3 +71,14 @@ lololodash will call your function and test it with different arguments.
  » For help run: lololodash help
 */
 
+var _ = require("lodash");
+    
+var worker = function( obj ) {
+	return _.chain(obj)
+		.map( function (item) { return item.toUpperCase() + "CHAINED" } )
+		.sortBy()
+		.value();
+};
+    
+module.exports = worker;
+
