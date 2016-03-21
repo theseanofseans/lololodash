@@ -42,15 +42,15 @@ value of each key is an array of the elements for which the key was generated.
     );
     
     
-    {
-        'mike': [
-            {name: 'mike', age: 23},
-            {name: 'mike', age: 41}
-        ],
-        'tom': [
-            {name: 'tom', age: 19}
-        ]
-    }
+//    {
+//        'mike': [
+//            {name: 'mike', age: 23},
+//            {name: 'mike', age: 41}
+//        ],
+//        'tom': [
+//            {name: 'tom', age: 19}
+//        ]
+//    }
     
 
 Another helper function I use often is size.
@@ -122,6 +122,12 @@ lololodash will call your function and test it with different arguments.
 var _ = require("lodash");
     
 var worker = function(obj) {
+	return _.chain(obj).groupBy( 'username' )
+	.map( function(value,key) {
+		return { username: key , comment_count: _.size(value) };
+	})
+	.sortBy(function(item) { return -1 * item.comment_count; })
+	.value();
 };
     
 module.exports = worker;
