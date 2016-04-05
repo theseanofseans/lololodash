@@ -70,3 +70,16 @@ lololodash will call your function and test it with different arguments.
  » For help run: lololodash help
 */
 
+var _ = require("lodash");
+    
+var worker = function(obj) {
+	var text= "Hello <%= name %> (logins: <%= num_logins %>)";
+	var data= {
+		name: obj.name ,
+		num_logins: _.size( obj.login )
+	};
+	return _.template(text)(data);
+};
+
+module.exports = worker;
+
