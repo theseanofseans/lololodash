@@ -93,3 +93,29 @@ lololodash will call your function and test it with different arguments.
  » For help run: lololodash help
 */
 
+// https://lodash.com/docs#reduce
+var _ = require("lodash");
+    
+var worker = function(obj) {
+	return _.chain(obj).reduce( function(results, row ) {
+		if (_.size(results) == 0)
+			results.push( { article: row.article , total_orders: row.quantity } );
+		else {
+			var added= 0;
+			_.forEach( results , function(item) {
+				if (item.article === row.article) {
+					item.total_orders+= row.quantity;
+					added++;
+				}
+			});
+			if (added == 0)
+				results.push( { article: row.article , total_orders: row.quantity } );
+		}
+		return results;
+	} , [] )
+	.sortBy(function(item) { return -1 * item.total_orders; })
+	.value();
+};
+
+module.exports = worker;
+
