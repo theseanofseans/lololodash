@@ -113,3 +113,29 @@ Good luck!
  » For help run: lololodash help
 */
 
+var _ = require("lodash");
+    
+var worker = function(obj) {
+	var all= {
+		average: 0 ,
+		"underperform": [] ,
+		"overperform": []
+	};
+
+	all.average= _.reduce( obj , function(sum, row ) { return  parseInt(row.income) + sum; } , 0) / _.size(obj);
+
+	_.chain(obj)
+	.sortBy(function(item) { return item.income; })
+	.forEach( function(row) {
+		if (row.income > all.average)
+			all.overperform.push( row );
+		else
+			all.underperform.push( row );
+	})
+	.value();
+
+	return all;
+};
+
+module.exports = worker;
+
